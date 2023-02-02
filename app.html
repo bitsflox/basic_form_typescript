@@ -1,0 +1,44 @@
+<form id="form">
+  <input type="text" id="name" placeholder="Name">
+    <input type="number" id="age" placeholder="Age">
+  <button type="submit">Submit</button>
+</form>
+
+<ul id="list"></ul>
+
+<script>
+  interface Person {
+    name: string;
+    age: number;
+  }
+
+  let users: Person[] = [];
+
+  let form = document.getElementById("form") as HTMLFormElement;
+  let nameInput = document.getElementById("name") as HTMLInputElement;
+  let ageInput = document.getElementById("age") as HTMLInputElement;
+  let list = document.getElementById("list") as HTMLElement;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    let user: Person = {
+      name: nameInput.value,
+      age: parseInt(ageInput.value),
+    };
+
+    users.push(user);
+
+    renderList();
+  });
+
+  function renderList() {
+    list.innerHTML = "";
+
+    for (let user of users) {
+      let li = document.createElement("li");
+      li.innerHTML = `Name: ${user.name}, Age: ${user.age}`;
+      list.appendChild(li);
+    }
+  }
+</script>
